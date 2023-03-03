@@ -40,7 +40,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
             log.info("devlog connection : " + connection);
 
             //자동증가키
-            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id}"});
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
             ps.setString(1, item.getItemName());
             ps.setInt(2, item.getPrice());
             ps.setInt(3, item.getQuantity());
@@ -55,7 +55,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
 
     @Override
     public void update(Long itemId, ItemUpdateDto updateParam) {
-        String sql = "update  item set item_name = ?, price = ?, quantity = ? from item where id = ?";
+        String sql = "update item set item_name = ?, price = ?, quantity = ? where id = ?";
         template.update(sql,
                 updateParam.getItemName(),
                 updateParam.getPrice(),
@@ -79,7 +79,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
         String itemName = cond.getItemName();
         Integer maxPrice = cond.getMaxPrice();
 
-        String sql = "select  id, item_name, price, quantity from item where id = ?";
+        String sql = "select  id, item_name, price, quantity from item ";
 
         //동적쿼리
         if (StringUtils.hasText(itemName) || maxPrice != null) {
