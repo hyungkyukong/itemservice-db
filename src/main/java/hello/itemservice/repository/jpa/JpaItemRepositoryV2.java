@@ -52,4 +52,6 @@ public class JpaItemRepositoryV2 implements ItemRepository {
             return repository.findAll();
         }
     }
+
+
 }
